@@ -1,0 +1,38 @@
+name: Summary
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+
+jobs:
+  summary-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{github.event.pull_request.head.ref}}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+          cache-dependency-path: .github/test/package-lock.json
+      - run: npm install --prefix .github/test
+      - run: npm test --prefix .github/test
+
+      - uses: pascalgn/automerge-action@v0.14.3
+        env:
+          MERGE_LABELS: ""
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
+      - name: Telegram notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: Thanks ${{ github.event.pull_request.user.login }} has been submitted

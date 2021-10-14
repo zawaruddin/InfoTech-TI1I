@@ -1,0 +1,23 @@
+{
+  "name": "attendances",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhanifudin/attendances.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dhanifudin/attendances/issues"
+  },
+  "homepage": "https://github.com/dhanifudin/attendances#readme",
+  "dependencies": {
+    "glob": "^7.1.7",
+    "md-stats": "^1.0.3"
+  }
+}
