@@ -1,6 +1,6 @@
 const getMarkdownStats = require("md-stats");
 const path = "../../attendances";
-const MINIMAL_WORDS = 150;
+const MINIMAL_WORDS = 5;
 
 (async () => {
   const stats = await getMarkdownStats(path);
